@@ -1,0 +1,9 @@
+<%= form_tag("search", method: "get") do %>
+  <div class="field">
+    <%= select_tag(:from_airport, options_for_select(@from_flight)) %>
+    <%= select_tag(:to_airport, options_for_select(@to_flight)) %>
+    <%= select_tag(:departure_date, options_for_select(@date)) %>
+    <%= submit_tag("Search", class: "btn btn-primary") %>
+  </div>
+<% end %>
+
