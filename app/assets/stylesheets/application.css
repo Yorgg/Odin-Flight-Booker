@@ -12,4 +12,17 @@
  *
  *= require_tree .
  *= require_self
+
  */
+@import "bootstrap-sprockets";
+@import "bootstrap";
+
+
+/* forms */
+
+input, textarea, select, .uneditable-input {
+  border: 2px solid #bbb;
+  width: 100%;
+  margin-bottom: 15px;
+  @include box_sizing;
+}

@@ -1,3 +1,8 @@
+<div class="row">
+  <div class="col-md-4 col-md-offset-4">
+<center>
+
+<h1> Flights  </h1>
 <%= form_tag("search", method: "get") do %>
   <div class="field">
     <%= select_tag(:from_airport, options_for_select(@from_flight)) %>
@@ -7,3 +12,34 @@
   </div>
 <% end %>
 
+
+<% if @flight_dates %>
+<br><br>
+ <table class="table table-striped">
+    <% @flight_dates.each do |x| %>
+     
+ 
+  <thead class="header">
+    <tr>
+    <th>Choose</th>
+      <th>Departing</th>
+      <th>Arriving</th>
+      <th>Date</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+     <td>s </td>
+      <td><%= x.from_airport.name %> </td>
+      <td> <%= x.to_airport.name %></td>
+      <td><%= x.departure_date %></td>
+    </tr>
+  
+  </tbody>
+ <% end %>
+  </table>
+<% end %>
+
+</center>
+</div>
+</div>
