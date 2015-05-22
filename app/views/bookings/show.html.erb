@@ -1,0 +1,17 @@
+
+<center><h1> Booking Confirmed! </h1></center>
+
+<div class="row">
+	<div class="col-md-4 col-md-offset-4">
+ <% @booking.passengers.each do |x| %>
+    For: <%= x.name %>
+   <br>
+   Email: <%= x.email %>
+   <br><br>
+   <% end %>
+
+   <p> Flight Leaves: <%=   @booking.flight.departure_date.strftime('%B %d, %Y at %H:%M') %></p>
+  <p>From: <%=   @booking.flight.from_airport.name %></p>
+  <p> To: <%=   @booking.flight.to_airport.name %></p>
+
+ </div></div>

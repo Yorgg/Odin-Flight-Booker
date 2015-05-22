@@ -2,44 +2,48 @@
   <div class="col-md-4 col-md-offset-4">
 <center>
 
-<h1> Flights  </h1>
+<h1> Flights </h1>
 <%= form_tag("search", method: "get") do %>
   <div class="field">
-    <%= select_tag(:from_airport, options_for_select(@from_flight)) %>
-    <%= select_tag(:to_airport, options_for_select(@to_flight)) %>
-    <%= select_tag(:departure_date, options_for_select(@date)) %>
-    <%= submit_tag("Search", class: "btn btn-primary") %>
+    <%= select_tag(:from_airport, options_for_select(@valid_airports), prompt: "From" ) %>
+    <%= select_tag(:to_airport, options_for_select(@valid_airports), prompt: "To" ) %>
+    <%= select_tag(:departure_date, options_for_select(@date), prompt: "Date" ) %>
+    <%= select_tag(:passengers, options_for_select(@passenger_options), prompt: "Passengers" )  %> 
+    <%= submit_tag("Search", class: "btn btn-primary" ) %>
   </div>
 <% end %>
 
-
-<% if @flight_dates %>
-<br><br>
- <table class="table table-striped">
-    <% @flight_dates.each do |x| %>
-     
- 
-  <thead class="header">
+<% unless @flights.empty? %>
+  <br><br>
+  <table class="table table-striped">
+   <thead class="header">
     <tr>
-    <th>Choose</th>
+      <th>Choose</th>
       <th>Departing</th>
       <th>Arriving</th>
       <th>Date</th>
     </tr>
-  </thead>
-  <tbody>
-    <tr>
-     <td>s </td>
-      <td><%= x.from_airport.name %> </td>
-      <td> <%= x.to_airport.name %></td>
-      <td><%= x.departure_date %></td>
-    </tr>
+  </thead>  
+
+  <tbody>  
+  <%= form_tag new_booking_path, :method => 'get' do %>
+    <% @flights.each do |f| %>
+      <tr>
+      <td> <%= radio_button_tag(:flight_id, f.id) %> </td>
+      <td><%= f.from_airport.name %> </td>
+      <td> <%= f.to_airport.name %></td>
+      <td><%= f.departure_date.strftime('%B %d, %Y at %H:%M')  %></td>
+      </tr>
+    <% end %>
+    <%= hidden_field_tag :passengers, params[:passengers] %>
   
   </tbody>
- <% end %>
   </table>
+  <%= submit_tag "Select Flight", class: "btn btn-success" %>
+   <% end %>  
 <% end %>
-
 </center>
+
+
 </div>
 </div>
