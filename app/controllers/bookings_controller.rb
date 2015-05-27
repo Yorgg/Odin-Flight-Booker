@@ -9,6 +9,7 @@ class BookingsController < ApplicationController
   def create
 	@booking = Booking.new(booking_params)
 	if @booking.save
+	  sender(@booking) 
 	  redirect_to @booking
 	else
 	  render 'new'
@@ -25,4 +26,9 @@ class BookingsController < ApplicationController
   	params.require(:booking).permit(:flight_id, :passengers_attributes => [:name, :email])
   end
 
+  def sender(booking)
+    booking.passengers.each do |p|  
+      PassengerMailer.booking_email(p).deliver_now
+    end
+  end
 end
